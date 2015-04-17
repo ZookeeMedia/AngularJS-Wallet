@@ -33,6 +33,7 @@ function ctrl($scope){
     
     if($scope.creditAmount) $scope.rows.push($scope.creditAmount);
     else $scope.temp = false;
+    
   };
 
   $scope.debitTemp = function(){
