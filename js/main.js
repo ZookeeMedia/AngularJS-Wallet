@@ -1,5 +1,15 @@
+$(document).ready(function() {
+
+    $('.btn-primary').click(function(e) {
+      e.preventDefault();
+      $('#credit, #debit').val('');
+    }); 
+
+});
+
+
 function ctrl($scope){
-  $scope.rows = [20,37,412];
+  $scope.rows = [];
   $scope.temp = false;
   
   $scope.addRow = function(){
@@ -23,12 +33,13 @@ function ctrl($scope){
     return total;
   };
 
-  $scope.credittotal = function (){
-    //
-  };
-
-  $scope.debittotal = function (){
-    //
+  $scope.creditdebit = function (amount){
+    if(amount > 0){
+      cd = "credit";
+    } else {
+      cd = "debit";
+    }
+    return cd;
   };
 
   $scope.creditTemp = function(){
