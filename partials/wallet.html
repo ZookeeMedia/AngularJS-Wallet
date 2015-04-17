@@ -1,19 +1,18 @@
-<div id="wallet-container">
-
-<div class="row">
-  <div class="col-md-4">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua.</p>
-  </div>
-  <div class="col-md-4"> 
-    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-    aliquip ex ea commodo consequat.</p>
-  </div>
-  <div class="col-md-4"> 
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-    doloremque laudantium, totam rem aperiam.</p>
-  </div>
-</div>
 
 
-</div>
+<table class="table"> 
+	<thead> 
+		<tr> 
+			<th>Credit/Debit</th> 
+			<th>Amount</th> 
+			<th>Date</th> 
+		</tr> 
+	</thead> 
+	<tbody> 
+		<tr ng-repeat="aStudent in studentList"> 
+			<td>{{aWallet.creditdebit }}</td> 
+			<td>{{aWallet.amount }}</td> 
+			<td>{{aWallet.date }}</td> 
+		</tr> 
+	</tbody> 
+</table>

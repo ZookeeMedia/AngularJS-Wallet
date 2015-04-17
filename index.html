@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
@@ -11,6 +11,7 @@
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
+
 	</head>
 	<body>
 <div class="navbar navbar-default navbar-static-top">
@@ -37,14 +38,61 @@
 
 <div class="container">
   
-  <div class="text-center">
-    <h1>Bootstrap starter template</h1>
-    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+<div class="row" ng-controller="ctrl">
+  <div class="col-md-4">
+
+    <form class="form-horizontal">
+    <span ng-class="{'input-append':creditAmount}">
+      <input id="credit" class="pull-right" type="text" placeholder="credit" ng-model="creditAmount" ng-change="creditTemp()"/>
+      <input type="submit" class="btn btn-primary" ng-click="addRow('credit')" ng-show="creditAmount" value="+ credit"/>
+      </span>
+
+      <!--
+      <span ng-class="{'input-append':addName}">
+      <input id="add" type="text" placeholder="Another one ?" ng-model="addName" ng-change="addTemp()"/>
+      <input type="submit" class="btn btn-primary" ng-click="addRow()" ng-show="addName" value="+ add"/>
+      </span>
+      -->
+    </form>
+
   </div>
+  <div class="col-md-4" >
+
+    <h2>{{rows.length}} Entrie{{plural(rows)}} <span ng-show="temp">?<small class="muted"><em > (only {{rows.length-1}} actually....)</em></small></span></h2>
+    
+    <table  class="table table-striped">
+      <tr>
+        <th>credit/debit</th>
+        <th>Amount</th>
+        <th>Date</th>
+      </tr>
+      <tr ng-repeat="row in rows | filter : search"  ng-class="{'muted':isTemp($index)}">
+        <td>{{$index+1}}</td>
+        <td>{{row}}</td>
+        <td>
+          <button class="btn btn-danger btn-mini" ng-click="deleteRow(row)" ng-hide="isTemp($index)"><i class="icon-trash icon-white"></i></button>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="col-md-4">
+
+<form class="form-horizontal">
+    <span ng-class="{'input-append':debitAmount}">
+      <input id="debit" type="text" placeholder="debit" ng-model="debitAmount" ng-change="debitTemp()"/>
+      <input type="submit" class="btn btn-primary" ng-click="addRow('debit')" ng-show="debitAmount" value="+ debit"/>
+    </span>
+    </form>
+
+  </div>
+</div>
   
 </div><!-- /.container -->
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
