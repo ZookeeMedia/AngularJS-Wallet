@@ -14,12 +14,32 @@ function ctrl($scope){
   $scope.plural = function (tab){
     return tab.length > 1 ? 's': ''; 
   };
-  
-  $scope.addTemp = function(){
+
+  $scope.total = function (){
+    //
+  };
+
+  $scope.credittotal = function (){
+    //
+  };
+
+  $scope.debittotal = function (){
+    //
+  };
+
+  $scope.creditTemp = function(){
     if($scope.temp) $scope.rows.pop(); 
-    else if($scope.addName) $scope.temp = true;
+    else if($scope.creditAmount) $scope.temp = true;
     
-    if($scope.addName) $scope.rows.push($scope.addName);
+    if($scope.creditAmount) $scope.rows.push($scope.creditAmount);
+    else $scope.temp = false;
+  };
+
+  $scope.debitTemp = function(){
+    if($scope.temp) $scope.rows.pop(); 
+    else if($scope.debitAmount) $scope.temp = true;
+    
+    if($scope.debitAmount) $scope.rows.push($scope.debitAmount);
     else $scope.temp = false;
   };
   
