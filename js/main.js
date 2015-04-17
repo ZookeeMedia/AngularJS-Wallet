@@ -1,5 +1,5 @@
 function ctrl($scope){
-  $scope.rows = ['20','37','412'];
+  $scope.rows = [20,37,412];
   $scope.temp = false;
   
   $scope.addRow = function(){
@@ -16,7 +16,11 @@ function ctrl($scope){
   };
 
   $scope.total = function (){
-    //
+    var total = 0;
+    for(var i = 0; i < $scope.rows.length; i++){
+        total = (total + $scope.rows[i]);
+    }
+    return total;
   };
 
   $scope.credittotal = function (){
@@ -31,16 +35,15 @@ function ctrl($scope){
     if($scope.temp) $scope.rows.pop(); 
     else if($scope.creditAmount) $scope.temp = true;
     
-    if($scope.creditAmount) $scope.rows.push($scope.creditAmount);
+    if($scope.creditAmount) $scope.rows.push(+$scope.creditAmount);
     else $scope.temp = false;
-    
   };
 
   $scope.debitTemp = function(){
     if($scope.temp) $scope.rows.pop(); 
     else if($scope.debitAmount) $scope.temp = true;
     
-    if($scope.debitAmount) $scope.rows.push($scope.debitAmount);
+    if($scope.debitAmount) $scope.rows.push(-$scope.debitAmount);
     else $scope.temp = false;
   };
   
