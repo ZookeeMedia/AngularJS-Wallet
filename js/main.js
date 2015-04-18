@@ -5,7 +5,10 @@ $(document).ready(function() {
     });
 });
 
-function ctrl($scope){
+var app = angular.module("walletApp", []);
+
+app.controller("ctrl", function($scope) {
+//function ctrl($scope){
   $scope.rows = [];
   $scope.ol = function(){ 
     return Object.keys($scope.rows).length;
@@ -86,4 +89,4 @@ function ctrl($scope){
     return i==$scope.rows.length-1 && $scope.temp;
   };
   
-}
+});
