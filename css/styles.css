@@ -1,0 +1,6 @@
+.currency0:before{
+	content:"\00a3";
+}
+.currency0{
+	text-align: right;
+}

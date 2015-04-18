@@ -50,10 +50,20 @@ function ctrl($scope){
     //else if($scope.creditAmount) $scope.temp = true;
 
     rightnow = $scope.todaysDate();
-    //rightnow = "17-04-2015:16:47pm";
     
     if($scope.creditAmount)  $scope.rows = $scope.rows.concat( [{amount:+$scope.creditAmount, date:rightnow}] );
     else $scope.temp = false;
+  };
+
+  $scope.debitTemp = function(){
+    //if($scope.temp) $scope.rows.pop(); 
+    //else if($scope.debitAmount) $scope.temp = true;
+    
+    rightnow = $scope.todaysDate();
+
+    if($scope.debitAmount)  $scope.rows = $scope.rows.concat( [{amount:-$scope.debitAmount, date:rightnow}] );
+    else $scope.temp = false;
+
   };
 
   $scope.todaysDate = function(){
@@ -79,18 +89,6 @@ function ctrl($scope){
 
   }
 
-  $scope.debitTemp = function(){
-    //if($scope.temp) $scope.rows.pop(); 
-    //else if($scope.debitAmount) $scope.temp = true;
-    
-    rightnow = $scope.todaysDate();
-    //rightnow = "17-04-2015:16:47pm";
-
-    if($scope.debitAmount)  $scope.rows = $scope.rows.concat( [{amount:-$scope.debitAmount, date:rightnow}] );
-    else $scope.temp = false;
-
-  };
-  
   $scope.isTemp = function(i){
     return i==$scope.rows.length-1 && $scope.temp;
   };
