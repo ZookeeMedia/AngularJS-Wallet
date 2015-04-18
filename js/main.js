@@ -1,12 +1,8 @@
 $(document).ready(function() {
-
     $('.btn-primary').click(function(e) {
       e.preventDefault();
       $('#credit, #debit').val('');
     });
-
-
-
 });
 
 function ctrl($scope){
@@ -17,25 +13,12 @@ function ctrl($scope){
   
   $scope.temp = false;
   
-  $scope.addRow = function(){
-    $scope.temp = false;
-    $scope.addName="";
-  };
-  
-  $scope.deleteRow = function(row){
-    $scope.rows.splice($scope.rows.indexOf(row),1);
-  };
-  
-  $scope.plural = function (tab){
-    return tab.length > 1 ? 's': ''; 
-  };
-
   $scope.total = function (){
     var total = 0;
     for(var i = 0; i < $scope.rows.length; i++){
         total = (total + $scope.rows[i].amount);
     }
-    return total;
+    return total.toFixed(2);
   };
 
   $scope.creditdebit = function (amount){
@@ -48,25 +31,20 @@ function ctrl($scope){
   };
 
   $scope.creditTemp = function(){
-    //if($scope.temp) $scope.rows.pop(); 
-    //else if($scope.creditAmount) $scope.temp = true;
-
     rightnow = $scope.todaysDate();
     
-    if($scope.creditAmount)  $scope.rows = $scope.rows.concat( [{amount:+$scope.creditAmount, date:rightnow}] );
+    if($scope.creditAmount)  $scope.rows = $scope.rows.concat( [{amount:+$scope.creditAmount.toFixed(2), date:rightnow}] );
     else $scope.temp = false;
 
   };
 
   $scope.debitTemp = function(){
-    //if($scope.temp) $scope.rows.pop(); 
-    //else if($scope.debitAmount) $scope.temp = true;
-    
     rightnow = $scope.todaysDate();
-
-    if($scope.debitAmount)  $scope.rows = $scope.rows.concat( [{amount:-$scope.debitAmount, date:rightnow}] );
-    else $scope.temp = false;
-
+    total = $scope.total();
+    if((parseFloat(total) - parseFloat($scope.debitAmount)) > 0 ){
+      if($scope.debitAmount)  $scope.rows = $scope.rows.concat( [{amount:-$scope.debitAmount.toFixed(2), date:rightnow}] );
+      else $scope.temp = false;
+    }
   };
 
   $scope.todaysDate = function(){
@@ -87,7 +65,6 @@ function ctrl($scope){
     } 
 
     today = dd+'-'+mm+'-'+yyyy+' '+hour+':'+minute;
-
     return today;
 
   }
