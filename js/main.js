@@ -5,6 +5,7 @@ $(document).ready(function() {
     });
 });
 
+
 var app = angular.module("walletApp", []);
 
 app.controller("ctrl", function($scope) {
