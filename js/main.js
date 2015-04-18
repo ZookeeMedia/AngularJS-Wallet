@@ -3,7 +3,9 @@ $(document).ready(function() {
     $('.btn-primary').click(function(e) {
       e.preventDefault();
       $('#credit, #debit').val('');
-    }); 
+    });
+
+
 
 });
 
@@ -53,6 +55,7 @@ function ctrl($scope){
     
     if($scope.creditAmount)  $scope.rows = $scope.rows.concat( [{amount:+$scope.creditAmount, date:rightnow}] );
     else $scope.temp = false;
+
   };
 
   $scope.debitTemp = function(){
@@ -87,6 +90,19 @@ function ctrl($scope){
 
     return today;
 
+  }
+
+  $scope.currencyFormat = function(amount){
+    f = amount;
+    if(!isNaN(amount)){
+      if(amount > 0){
+        f = "£" + f;
+      } else {
+        f *= -1;
+        f = "-£" + f;
+      }
+    }
+    return f;
   }
 
   $scope.isTemp = function(i){
