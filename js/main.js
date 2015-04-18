@@ -7,13 +7,10 @@ $(document).ready(function() {
 
 });
 
-
 function ctrl($scope){
-  $scope.rows = {"1234":"17-04-2015:15.30pm", "745":"17-04-2015:16:47pm"};
+  $scope.rows = [{amount: 1234,  date: "17-04-2015:15.30pm"},{amount: -234,  date: "17-04-2015:15.30pm"},{amount: 34,  date: "17-04-2015:15.30pm"}];
   $scope.ol = Object.keys($scope.rows).length;
   //$scope.rows.push{amount:36,date:'17/04/2015'}; //{amount:52,date:'17/04/2015'},{amount:29,date:'17/04/2015'}
-
-  console.info($scope.rows);
 
   $scope.temp = false;
   
@@ -51,11 +48,18 @@ function ctrl($scope){
     if($scope.temp) $scope.rows.pop(); 
     else if($scope.creditAmount) $scope.temp = true;
   
-    a = +$scope.creditAmount;
-    rightnow = $scope.todaysDate();
+    a = $scope.creditAmount;
+    //rightnow = $scope.todaysDate();
+    rightnow = "17-04-2015:16:47pm";
     //if($scope.creditAmount) $scope.rows.push(({amount:a,date:rightnow}); //if($scope.creditAmount) $scope.rows.push(+$scope.creditAmount);
-    if($scope.creditAmount) $scope.rows.push(+$scope.creditAmount);
+    //if($scope.creditAmount) $scope.rows.push(+$scope.creditAmount); // $scope.rows.push({+$scope.creditAmount:rightnow});
+    
+    //if($scope.creditAmount) $scope.rows.concat({$scope.creditAmount : rightnow} ); //push($scope.creditAmount ,rightnow);
+    if($scope.creditAmount) $scope.rows.concat( [{amount:a, date:rightnow}] ); //push($scope.creditAmount ,rightnow);
     else $scope.temp = false;
+
+    console.info($scope.rows);
+
   };
 
   $scope.todaysDate = function(){
@@ -73,7 +77,7 @@ function ctrl($scope){
         mm='0'+mm
     } 
 
-    today = dd+'/'+mm+'/'+yyyy;
+    today = dd+'-'+mm+'-'+yyyy;
 
     return today;
 
