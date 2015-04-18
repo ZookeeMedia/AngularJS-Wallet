@@ -8,10 +8,11 @@ $(document).ready(function() {
 });
 
 function ctrl($scope){
-  $scope.rows = [{amount: 1234,  date: "17-04-2015:15.30pm"},{amount: -234,  date: "17-04-2015:15.30pm"},{amount: 33,  date: "17-04-2015:15.30pm"}];
-  $scope.ol = Object.keys($scope.rows).length;
-  //$scope.rows.push{amount:36,date:'17/04/2015'}; //{amount:52,date:'17/04/2015'},{amount:29,date:'17/04/2015'}
-
+  $scope.rows = [];
+  $scope.ol = function(){ 
+    return Object.keys($scope.rows).length;
+  }
+  
   $scope.temp = false;
   
   $scope.addRow = function(){
@@ -48,8 +49,8 @@ function ctrl($scope){
     //if($scope.temp) $scope.rows.pop(); 
     //else if($scope.creditAmount) $scope.temp = true;
 
-    //rightnow = $scope.todaysDate();
-    rightnow = "17-04-2015:16:47pm";
+    rightnow = $scope.todaysDate();
+    //rightnow = "17-04-2015:16:47pm";
     
     if($scope.creditAmount)  $scope.rows = $scope.rows.concat( [{amount:+$scope.creditAmount, date:rightnow}] );
     else $scope.temp = false;
@@ -57,10 +58,12 @@ function ctrl($scope){
 
   $scope.todaysDate = function(){
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
-    var yyyy = today.getFullYear();
+    var today   = new Date();
+    var dd      = today.getDate();
+    var mm      = today.getMonth()+1; //January is 0!
+    var yyyy    = today.getFullYear();
+    var hour    = today.getHours();
+    var minute  = today.getMinutes();
 
     if(dd<10) {
         dd='0'+dd
@@ -70,7 +73,7 @@ function ctrl($scope){
         mm='0'+mm
     } 
 
-    today = dd+'-'+mm+'-'+yyyy;
+    today = dd+'-'+mm+'-'+yyyy+' '+hour+':'+minute;
 
     return today;
 
@@ -80,9 +83,9 @@ function ctrl($scope){
     //if($scope.temp) $scope.rows.pop(); 
     //else if($scope.debitAmount) $scope.temp = true;
     
-    //rightnow = $scope.todaysDate();
-    rightnow = "17-04-2015:16:47pm";
-    
+    rightnow = $scope.todaysDate();
+    //rightnow = "17-04-2015:16:47pm";
+
     if($scope.debitAmount)  $scope.rows = $scope.rows.concat( [{amount:-$scope.debitAmount, date:rightnow}] );
     else $scope.temp = false;
 
