@@ -17,7 +17,7 @@ app.controller("ctrl", function(
   if($localStorage.data) $scope.rows = $localStorage.data;
   $scope.ol = function(){ 
     return Object.keys($scope.rows).length;
-  }
+  };
   
   $scope.temp = false;
   
@@ -70,17 +70,17 @@ app.controller("ctrl", function(
     var minute  = today.getMinutes();
 
     if(dd<10) {
-        dd='0'+dd
-    } 
+        dd='0'+dd;
+    }
 
     if(mm<10) {
-        mm='0'+mm
-    } 
+        mm='0'+mm;
+    }
 
     today = dd+'-'+mm+'-'+yyyy+' '+hour+':'+minute;
     return today;
 
-  }
+  };
 
   $scope.currencyFormat = function(amount){
     f = amount;
@@ -93,12 +93,12 @@ app.controller("ctrl", function(
       }
     }
     return f;
-  }
+  };
 
   $scope.deleteData = function(){
     $scope.rows = [];
     $localStorage.$reset();
-  }
+  };
 
   $scope.isTemp = function(i){
     return i==$scope.rows.length-1 && $scope.temp;
