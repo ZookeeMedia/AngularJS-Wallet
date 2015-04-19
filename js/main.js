@@ -15,7 +15,7 @@ app.controller("ctrl", function(
 
   $scope.rows = [];
   if($localStorage.data) $scope.rows = $localStorage.data;
-  $scope.ol = function(){ 
+  $scope.ol = function(){
     return Object.keys($scope.rows).length;
   };
   
