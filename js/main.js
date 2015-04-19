@@ -6,11 +6,15 @@ $(document).ready(function() {
 });
 
 
-var app = angular.module("walletApp", []);
+var app = angular.module("walletApp", ['ngStorage']);
 
-app.controller("ctrl", function($scope) {
-//function ctrl($scope){
+app.controller("ctrl", function(
+    $scope,
+    $localStorage
+  ){
+
   $scope.rows = [];
+  if($localStorage.data) $scope.rows = $localStorage.data;
   $scope.ol = function(){ 
     return Object.keys($scope.rows).length;
   }
@@ -40,6 +44,8 @@ app.controller("ctrl", function($scope) {
     if($scope.creditAmount)  $scope.rows = $scope.rows.concat( [{amount:+$scope.creditAmount.toFixed(2), date:rightnow}] );
     else $scope.temp = false;
 
+    $localStorage.data = $scope.rows;
+
   };
 
   $scope.debitTemp = function(){
@@ -48,6 +54,9 @@ app.controller("ctrl", function($scope) {
     if((parseFloat(total) - parseFloat($scope.debitAmount)) > 0 ){
       if($scope.debitAmount)  $scope.rows = $scope.rows.concat( [{amount:-$scope.debitAmount.toFixed(2), date:rightnow}] );
       else $scope.temp = false;
+
+      $localStorage.data = $scope.rows;
+
     }
   };
 
@@ -84,6 +93,11 @@ app.controller("ctrl", function($scope) {
       }
     }
     return f;
+  }
+
+  $scope.deleteData = function(){
+    $scope.rows = [];
+    $localStorage.$reset();
   }
 
   $scope.isTemp = function(i){
